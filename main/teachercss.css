@@ -1,0 +1,351 @@
+
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: AliceBlue;
+    border-radius:5px;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-right:1px #ccc solid
+}
+
+.tab button:hover {
+    background-color: lightblue;
+}
+
+.tab button.active {
+    background-color: cornflowerblue;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+	width: 95%;
+	height: 95%;
+}
+
+.timetable {
+    width:90%;
+    border-collapse: collapse;
+    left: 5%;
+    position: relative;
+    margin-bottom:25px;
+    max-height: 100%;
+    font-family: Georgia;
+}
+
+.timetable td {
+	border-bottom: 1px #B4B1AE solid;
+}
+
+.timetable th {
+    background-color:AliceBlue;
+}
+
+.tableDay {
+    width: 10%;
+    text-align: center;
+    border-bottom: 3px #B4B1AE solid !important;
+}
+
+.tablePeriod {
+    width:3%;
+    text-align: center;
+    border-left: 1px #B4B1AE  solid;
+    border-right: 1px #B4B1AE solid;
+    padding-top:2px;
+}
+.timetable tbody:nth-child(1) {
+    border:none;
+}
+
+.timetable tbody {
+    background-color: #EEEDEB;
+}
+
+.timetable tr:nth-child(7){
+    border-bottom: 3px #B4B1AE solid;
+}
+
+.timetable tbody:nth-child(even) {
+    background-color: #F5F4F3;
+}
+
+.modal {
+    display: none;
+	position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 2.5%;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.modal-content b {
+    font-size: 20px;
+}
+
+#edittitle, #editdesc, #editracc, #createtitle, #createdesc, #createracc {
+    padding:14px 20px;
+    border-radius:4px;
+    border: 1px solid #ccc;
+    margin: 8px 0px;
+}
+
+#editdesc, #editracc, #createdesc, #createracc {
+    width:80%;
+    height:10%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cancel, .cancel2{
+    color: grey;
+    position:relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    font-size: 18px;
+    display: inline-block;
+    -webkit-transition-duration: 0.4s;
+    padding:15px 32px;
+    text-align: center;
+    text-decoration: none;
+    border-radius:3px;
+    margin:0px 10px;
+}
+
+.cancel:hover, .cancel2:hover{
+    background-color: crimson;
+    cursor: pointer;
+    color:white;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24), 0 15px 40px 0 rgba(0,0,0,0.19);
+}
+
+.CreateRequisition {
+	background-color: DarkGrey;
+    border:none;
+	width:45px;
+    height:45px;
+    left: 42.5%;
+    transform: translate(-42.5%, 0%);
+    position:relative;
+    border-radius:100%;
+    color:white;
+    font-weight: normal;
+    margin-top:8px;
+    font-size: 35px;
+    -webkit-transition-duration: 0.8s;
+}
+
+.CreateRequisition:hover {
+    background-color:white;
+    color: DarkGrey;
+    cursor: pointer;
+}
+
+.test {
+    height:100%;
+}
+
+.lesson:hover {
+	background-color: AliceBlue;
+	cursor: pointer;
+}
+
+.lesson, .lessonCreate {
+    padding: 1%;
+    line-height: 120%;
+}
+
+
+.emptyLesson {
+    background: repeating-linear-gradient(
+            -45deg,
+            #EAF5FF,
+            #EAF5FF 5px,
+            #d2dce5 5px,
+            #d2dce5 15px
+    );
+}
+
+
+.reqTitle {
+    text-align: center;
+    line-height: 180%;
+    display: inline-block;
+    position: relative;
+    left: 42.5%;
+    transform: translate(-42.5%, 0%);
+    font-size: 17px;
+}
+
+.lessonInfo {
+    display:inline-block;
+    float:left;
+    min-width:100px;
+    font-size:18px;
+}
+
+.weekLetter p{
+    left:50%;
+    position:relative;
+    font-size: 50px;
+    margin: unset;
+    margin-bottom:0.5%;
+    font-family: Verdana, Geneva, sans-serif;
+    letter-spacing: 5px;
+    font-weight: 600;
+}
+
+.indicator {
+    background-color: lightgreen;
+    position: relative;
+    border-radius: 15%;
+    width: 2.5%;
+    padding: 0px 28px 83px 0px;
+    float: right;
+    opacity: 0.6;
+    margin: -1%;
+    border:solid 0.5px #B4B1AE;
+}
+
+.lessonCreate .indicator {
+    background-color: indianred;
+}
+
+
+#editButton, .removeButton, .updateButton, .createButton {
+    background-color: AliceBlue;
+    border: none;
+    border-radius: 3px;
+    color: GrayText;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s;
+    margin:10px;
+}
+
+#editButton {
+    position:relative;
+    left:44%;
+    transform: translate(-50%, 0%);
+}
+
+
+.createButton {
+    position:relative;
+    left:50%;
+    margin-bottom:0;
+    transform: translate(-50%, 0%);
+}
+.updateButton {
+    position:relative;
+    margin-bottom:0;
+    left:50%;
+    transform: translate(-50%, 0%);
+}
+.removeForm {
+    display:inline-block;
+    position:relative;
+    left:45%;
+    transform: translate(-50%, 0%);
+}
+
+#desc, #rac, #title, #ras {
+    border-left: 0.5px black dotted;
+    padding-left: 10px;
+    margin-top:1%;
+}
+
+#editButton:hover, .removeButton:hover, .updateButton:hover, .createButton:hover {
+    cursor:pointer;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24), 0 15px 40px 0 rgba(0,0,0,0.19);
+}
+
+.removeButton:hover {
+    background-color: crimson;
+    color:white;
+}
+
+.crTitle, .edTitle, .infTitle {
+    position:relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size:20px;
+    display:inline-block;
+    text-align:center;
+}
+
+.crTitle h3, .edTitle h3, .infTitle h3 {
+    margin:0;
+    font-weight:normal;
+}
+
+.selectTeacher {
+    border-radius:100px;
+    position:relative;
+    left:4.5%;
+    margin:10px;
+    display: inline-block;
+    background-color: AliceBlue;
+    width:25%;
+    border: 1px solid #ccc;
+
+}
+
+.teacherOption {
+   padding:10px 16px;
+   background-color: inherit;
+   border:none;
+   border-radius:100px;
+   width: 25%;
+   -webkit-transition-duration: 0.4s;
+}
+
+.teacherOption:hover {
+    background-color:lightblue;
+    cursor: pointer;
+}
+
+.teacherOption:focus {
+    outline: none;
+}
+
+
+
+
+
