@@ -1,5 +1,6 @@
 <head>
 <link rel="stylesheet" type="text/css" href="teachercss.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <?php 
   if (isset($_POST['lesson_id'])){insertreq();}
@@ -31,7 +32,15 @@
       echo '<div class="selectTeacher">';
       $teachers=getTeachers();
       foreach($teachers as $tea) {
-          echo "<button class='teacherOption' onclick=openTeacher('$tea')>$tea</button>";
+          $url = $_SERVER['PHP_SELF'] . "?teach=$tea";
+
+          echo "<form class='teaOption' action='$url' method='POST'>";
+          if (isset($_POST['copyinfo'])) {
+              $copyinfo = $_POST['copyinfo'];
+
+              echo "<input type='hidden' value='$copyinfo' name='copyinfo'</input>";
+          }
+          echo "<input type='submit' class='teacherOption' value='$tea'></input></form>";
       }
       echo '</div>';
 
@@ -100,6 +109,17 @@ function openCity(evt, weekview) {
         window.location.assign(loc + "?teach=" +tea);
     }
 
+    function pasteInfo(info) {
+        var tit = document.getElementById('createtitle');
+        var des = document.getElementById('createdesc');
+        var racc = document.getElementById('createracc');
+        if (info[2] =="YES") { document.getElementById('createyes').checked="checked"; }
+        else { document.getElementById('createno').checked="checked"; }
+        tit.value = info[0];
+        des.value = info[1];
+        racc.value = info[3];
+    }
+
     function fillContent(type,t,d,ras,rac,rid,lid) {
 
         close1.onclick = function() {
@@ -121,15 +141,18 @@ function openCity(evt, weekview) {
             var desc = document.getElementById('desc');
             var rass = document.getElementById('ras');
             var racc = document.getElementById('rac');
-            var editButton = document.getElementById('editButton');
-            document.getElementById('infTitle').innerHTML=lid;
+            if (document.getElementById('rid')!==null) {
+                var editButton = document.getElementById('editButton');
+                document.getElementById('rid').value=rid;
+                editButton.onclick = function() { fillContent('edit', t, d, ras, rac, rid, lid); };
+            }
 
-            document.getElementById('rid').value=rid;
+            document.getElementById('infTitle').innerHTML=lid;
+            document.getElementById('copyInfo').value=t+'||'+d+'||'+ras+'||'+rac;
             title.innerHTML=t;
             desc.innerHTML=d;
             rass.innerHTML=ras;
             racc.innerHTML=rac;
-            editButton.onclick = function() { fillContent('edit', t, d, ras, rac, rid, lid); };
 
         }
         else if (type == "create") {
@@ -139,6 +162,10 @@ function openCity(evt, weekview) {
             document.getElementById('lesson_id').value=d;
             title.innerHTML=t;
             cancel.onclick = function() {
+                document.getElementById('createtitle').value='';
+                document.getElementById('createdesc').value='';
+                document.getElementById('createracc').value='';
+                document.getElementById('createno').checked="checked";
                 modal2.style.display = "none";
                 document.getElementsByTagName("body")[0].style ='overflow:visible';
             };

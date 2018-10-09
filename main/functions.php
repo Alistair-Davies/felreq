@@ -87,9 +87,11 @@ function generateModal($type) {
 		echo "<span><br/><b>Title:</b> <div id=title></div><br><b>Description: </b><div id=desc></div><br><b> Risk Assessment:</b> <div id=ras></div><br><b> Risk Actions: </b><div id=rac></rac></span></div>";
 		if ($enableEdit){
 		    generateModal("edit");
+		    echo "<span class=buttonContainer>";
 		    echo "<button id='editButton' onclick=fillContent('edit')> Edit Requisition</button>";
-		    echo "<form class='removeForm' action='' method='POST'><input id=rid type='hidden' name='remrid' value=''/><input onclick=\"return confirm('Are you sure? This will remove this requisition.');\" class='removeButton' type='submit' value='Remove requisition'/>";
+		    echo "<form class='removeForm' action='' method='POST'><input id=rid type='hidden' name='remrid' value=''/><input onclick=\"return confirm('Are you sure? This will remove this requisition.');\" class='removeButton' type='submit' value='Remove requisition'/></form>";
 		}
+		echo "<form class='copyForm' action='' method='POST'><input id=copyInfo type='hidden' name='copyinfo' value=''/><input id='copyButton' class='fa' type='submit' value='Copy  &#xf0c5'/></form></span>";
 		echo "</form></div>";
 	  }
 	  
@@ -101,9 +103,17 @@ function generateModal($type) {
 		echo "<input id=lesson_id type='hidden' name='lesson_id' value=''/><br/>";
 		echo "<b>Title:</b><br/> <input id='createtitle' type='text' name='title' value='' required /><br/>";
 		echo "<b>Description:</b><br/><textarea id='createdesc' name='desc' value='' rows='5' cols='50' required></textarea><br/>";
-		echo "<b>Risk Assessment:  </b><input type='radio' name='rass' value='YES'/> YES<input type='radio' name='rass' value='NO' checked/> NO<br/><br/>";
+		echo "<b>Risk Assessment:  </b><input type='radio' id='createyes' name='rass' value='YES'/> YES<input id='createno' type='radio' name='rass' value='NO' checked/> NO<br/><br/>";
 		echo "<b>Risk Actions:</b><br/><textarea id='createracc' rows='5' cols='50' value='' name='rac' required></textarea><br/>";
-		echo "<input type='submit' class=createButton value='Create'/></form><span class=\"cancel\">Cancel</span></div>";
+		echo "<span class='buttonContainer'><input type='submit' class=createButton value='Create'/>";
+		echo "<span class=\"cancel\">Cancel</span>";
+        if (isset($_POST['copyinfo'])) {
+            $p = json_encode(explode('||',$_POST['copyinfo']));
+
+            echo "<button id='pasteButton' class='fa' onclick='pasteInfo($p); return true;'> Paste &#xf0ea</button>";
+        }
+        echo "</span></form>";
+		echo "</div>";
 		echo "</div>";
 	  }
 
@@ -115,9 +125,10 @@ function generateModal($type) {
 		echo "<br/><b>Title:</b><br/><input id=edittitle type='text' name='title' value='' required/><br/>";
 		echo "<b>Description:</b><br/><textarea id='editdesc' name='desc' rows='5' cols='50' value='' required></textarea><br/>";
 		echo "<b>Risk Assessment:  </b><input id=editrassyes type='radio' name='rass' value='YES'/>YES <input id=editrassno type='radio' name='rass' value='NO'/> NO<br/><br/>";
-		echo "<b>Risk Actions:</b><br/><textarea id='editracc' rows='5' cols='50' value='' name='rac' required></textarea><br/>";
-		echo "<input class=updateButton type='submit' value='Update'/>";
-		echo "</form></span><span class='cancel2'>Cancel</span>";
+		echo "<b>Risk Actions:</b><br/><textarea id='editracc' rows='5' cols='50' value='' name='rac' required></textarea><br/></form>";
+		echo "<span class='buttonContainer'><input class=updateButton type='submit' value='Update'/>";
+		echo "<span class='cancel2'>Cancel</span>";
+		echo "</span>";
 		echo "</div></div>";
 		  
 	  }
