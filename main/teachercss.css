@@ -196,7 +196,7 @@
 }
 
 .weekLetter p{
-    left:50%;
+    text-align: center;
     position:relative;
     font-size: 50px;
     margin: unset;

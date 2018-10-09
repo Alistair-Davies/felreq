@@ -125,8 +125,8 @@ function generateModal($type) {
 		echo "<br/><b>Title:</b><br/><input id=edittitle type='text' name='title' value='' required/><br/>";
 		echo "<b>Description:</b><br/><textarea id='editdesc' name='desc' rows='5' cols='50' value='' required></textarea><br/>";
 		echo "<b>Risk Assessment:  </b><input id=editrassyes type='radio' name='rass' value='YES'/>YES <input id=editrassno type='radio' name='rass' value='NO'/> NO<br/><br/>";
-		echo "<b>Risk Actions:</b><br/><textarea id='editracc' rows='5' cols='50' value='' name='rac' required></textarea><br/></form>";
-		echo "<span class='buttonContainer'><input class=updateButton type='submit' value='Update'/>";
+		echo "<b>Risk Actions:</b><br/><textarea id='editracc' rows='5' cols='50' value='' name='rac' required></textarea><br/>";
+		echo "<span class='buttonContainer'><input class=updateButton type='submit' value='Update'/></form>";
 		echo "<span class='cancel2'>Cancel</span>";
 		echo "</span>";
 		echo "</div></div>";
@@ -137,9 +137,9 @@ function generateModal($type) {
 
 function insertreq() {
 	global $link;
-	$processedDesc = str_replace(array("\\n","\n", "\r"), '<br/>',$_POST['desc']);
-    $processedRacc = str_replace(array("\\n","\n", "\r"), '<br/>',$_POST['rac']);
-	$newreq = array($_POST['lesson_id'], $_POST['title'], htmlspecialchars($processedDesc, ENT_QUOTES) ,$_POST['rass'],$processedRacc);
+	$processedDesc = str_replace(array("\\n","\r\n", "\n"), '<br/>',$_POST['desc']);
+    $processedRacc = str_replace(array("\\n","\r\n", "\n"), '<br/>',$_POST['rac']);
+	$newreq = array($_POST['lesson_id'], $_POST['title'], htmlspecialchars($processedDesc, ENT_QUOTES),$_POST['rass'], htmlspecialchars($processedRacc, ENT_QUOTES));
 	$insert = "INSERT INTO requisition VALUES (DEFAULT, '$newreq[1]', '$newreq[2]', '$newreq[3]', '$newreq[4]', $newreq[0]);";
 	echo "$insert";
     if (mysqli_query($link, $insert)) {
@@ -165,9 +165,9 @@ function removereq($rid) {
 
 function updatereq($rid) {
 	global $link;
-    $processedDesc = str_replace(array("\\n","\n", "\r"), '<br/>',$_POST['desc']);
-    $processedRacc = str_replace(array("\\n","\n", "\r"), '<br/>',$_POST['rac']);
-	$updatereq = array($_POST['title'], htmlspecialchars($processedDesc), $_POST['rass'],$processedRacc);
+    $processedDesc = str_replace(array("\\n","\r\n", "\n"), '<br/>',$_POST['desc']);
+    $processedRacc = str_replace(array("\\n","\r\n", "\n"), '<br/>',$_POST['rac']);
+	$updatereq = array($_POST['title'], htmlspecialchars($processedDesc, ENT_QUOTES, ENT_HTML5), $_POST['rass'], htmlspecialchars($processedRacc, ENT_QUOTES));
 	$update = "UPDATE requisition SET title='$updatereq[0]', description='$updatereq[1]', risk_assessment='$updatereq[2]', risk_actions='$updatereq[3]' WHERE requisition_id=$rid";
 	if (mysqli_query($link, $update)) {
 		header('Location:'.$_SERVER['PHP_SELF']);
@@ -200,7 +200,7 @@ function insertLessons($day, $period, $teacher) {
 			}
 			
 			if (isset($req_title)) {
-			    echo '<td type="button" class="lesson" onclick="fillContent(\''."info".'\', \''.$req_title.'\', \''.htmlspecialchars($req_desc, ENT_QUOTES).'\', \''.$req_ras.'\', \''.$req_rac.'\', \''.$req_id.'\', \''.$lesson[0].'\')">';
+			    echo '<td type="button" class="lesson" onclick="fillContent(\''."info".'\', \''.$req_title.'\', \''.htmlspecialchars($req_desc, ENT_QUOTES).'\', \''.$req_ras.'\', \''.htmlspecialchars($req_rac, ENT_QUOTES).'\', \''.$req_id.'\', \''.$lesson[0].'\')">';
 				echo "<div><span class='reqTitle'><em>Requisition:</em><br/><b>$req_title</b></span>";
 				echo '<span class="lessonInfo">', $lesson[0] , '<br>', $lesson[1], '<br>', $lesson[2], '</span><span class="indicator"></span></div>';
 				echo '</td>';

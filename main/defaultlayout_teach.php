@@ -56,7 +56,15 @@
       echo '<div class="selectTeacher">';
       $teachers=getTeachers();
       foreach($teachers as $tea) {
-          echo "<button class='teacherOption' onclick=openTeacher('$tea')>$tea</button>";
+          $url = $_SERVER['PHP_SELF'] . "?teach=$tea";
+
+          echo "<form class='teaOption' action='$url' method='POST'>";
+          if (isset($_POST['copyinfo'])) {
+              $copyinfo = $_POST['copyinfo'];
+
+              echo "<input type='hidden' value='$copyinfo' name='copyinfo'</input>";
+          }
+          echo "<input type='submit' class='teacherOption' value='$tea'></input></form>";
       }
       echo '</div>';
 
@@ -101,14 +109,6 @@ function openCity(evt, weekview) {
     var cancel = document.getElementsByClassName("cancel")[0];
     var cancel2 = document.getElementsByClassName("cancel2")[0];
 
-    function openTeacher(tea) {
-        var loc = window.location.href;
-        if (loc.indexOf("?")>-1){
-            loc = loc.substr(0,loc.indexOf("?"));
-        }
-        window.location.assign(loc + "?teach=" +tea);
-    }
-
     function pasteInfo(info) {
         var tit = document.getElementById('createtitle');
         var des = document.getElementById('createdesc');
@@ -150,9 +150,9 @@ function openCity(evt, weekview) {
             document.getElementById('infTitle').innerHTML=lid;
             document.getElementById('copyInfo').value=t+'||'+d+'||'+ras+'||'+rac;
             title.innerHTML=t;
-            desc.innerHTML=d;
+            desc.innerHTML=d.replace(/&lt;br\/&gt;/g, '<br/>');
             rass.innerHTML=ras;
-            racc.innerHTML=rac;
+            racc.innerHTML=rac.replace(/&lt;br\/&gt;/g, '<br/>');
 
         }
         else if (type == "create") {
@@ -160,6 +160,7 @@ function openCity(evt, weekview) {
             modal2.style.display = "block";
             var title = document.getElementById('reqfor');
             document.getElementById('lesson_id').value=d;
+            title.innerHTML=t;
             title.innerHTML=t;
             cancel.onclick = function() {
                 document.getElementById('createtitle').value='';
@@ -175,10 +176,10 @@ function openCity(evt, weekview) {
             document.getElementById('edTitle').innerHTML=lid;
             document.getElementById('editreqid').value=rid;
             document.getElementById('edittitle').value=t;
-            document.getElementById('editdesc').value=d.replace(/<br\/>/g, '\n');
+            document.getElementById('editdesc').value=d.replace(/&lt;br\/&gt;/g, '\n').replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
             if (ras =="YES") { document.getElementById('editrassyes').checked="checked"; }
             else { document.getElementById('editrassno').checked="checked"; }
-            document.getElementById('editracc').value=rac.replace(/<br\/>/g, '\n');
+            document.getElementById('editracc').value=rac.replace(/&lt;br\/&gt;/g, '\n').replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 
             cancel2.onclick = function() {
                 modal3.style.display = "none";
