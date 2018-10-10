@@ -108,7 +108,9 @@ function generateModal($type) {
 		echo "<span><br/><b>Title:</b> <div id=title></div><br><b>Description: </b><div id=desc></div><br><b> Risk Assessment:</b> <div id=ras></div><br><b> Risk Actions: </b><div id=rac></rac></span></div>";
 		generateModal("edit");
 		echo "<button id='editButton' onclick=fillContent('edit')> Edit Requisition</button>";
-		echo "<form class='removeForm' action='' method='POST'><input id=rid type='hidden' name='remrid' value=''/><input onclick=\"return confirm('Are you sure? This will remove this requisition.');\" class='removeButton' type='submit' value='Remove requisition'/></form></div>";
+		echo "<form class='removeForm' action='' method='POST'><input id=rid type='hidden' name='remrid' value=''/><input onclick=\"return confirm('Are you sure? This will remove this requisition.');\" class='removeButton' type='submit' value='Remove requisition'/></form>";
+		echo "<form class='markDone' action='' method='POST'><input id=doneid type='hidden' name='doneID' value=''/><input id='doneEval' type='hidden' name='doneBool' value=''/><input id='doneButton' type='submit' value=''/></form>";
+        echo "</div>";
 	  }
 
 	  else if ($type == "create") {
@@ -134,20 +136,19 @@ function generateModal($type) {
 		echo "<b>Description:</b><br/><textarea id='editdesc' name='desc' rows='5' cols='50' value='' required></textarea><br/>";
 		echo "<b>Risk Assessment:  </b><input id=editrassyes type='radio' name='rass' value='YES'/>YES <input id=editrassno type='radio' name='rass' value='NO'/> NO<br/><br/>";
 		echo "<b>Risk Actions:</b><br/><textarea id='editracc' rows='5' cols='50' value='' name='rac' required></textarea><br/>";
-		echo "<input class=updateButton type='submit' value='Update'/>";
-		echo "</form></span><span class='cancel2'>Cancel</span>";
-		echo "</div></div>";
-
+        echo "<span class='buttonContainer'><input class=updateButton type='submit' value='Update'/></form>";
+        echo "<span class='cancel2'>Cancel</span>";
+        echo "</span>";
+        echo "</div></div>";
 	  }
-
 }
 
 function insertreq() {
 	global $link;
-	$processedDesc = str_replace(array("\\n","\n", "\r"), '<br/>',$_POST['desc']);
-	$processedRacc = str_replace(array("\\n","\n", "\r"), '<br/>',$_POST['rac']);
-	$newreq = array($_POST['lesson_id'], $_POST['title'], $processedDesc,$_POST['rass'],$processedRacc);
-	$insert = "INSERT INTO requisition VALUES (DEFAULT, '$newreq[1]', '$newreq[2]', '$newreq[3]', '$newreq[4]', $newreq[0]);";
+	$processedDesc = str_replace(array("\\n","\r\n", "\n"), '<br/>',$_POST['desc']);
+	$processedRacc = str_replace(array("\\n","\r\n", "\n"), '<br/>',$_POST['rac']);
+	$newreq = array($_POST['lesson_id'], htmlspecialchars(str_replace(array("\\n","\r\n", "\n"), ' ', $_POST['title']), ENT_QUOTES), htmlspecialchars($processedDesc, ENT_QUOTES),$_POST['rass'], htmlspecialchars($processedRacc, ENT_QUOTES));
+	$insert = "INSERT INTO requisition VALUES (DEFAULT, '$newreq[1]', '$newreq[2]', '$newreq[3]', '$newreq[4]', $newreq[0], FALSE);";
     if (mysqli_query($link, $insert)) {
 		header('Location:'.$_SERVER['PHP_SELF']);
 	}
@@ -169,11 +170,23 @@ function removereq($rid) {
 	$_POST=array();
 }
 
+function markDone($id, $doneBool) {
+    global $link;
+    $updquery = "UPDATE requisition set done_bool=$doneBool WHERE requisition_id=$id;";
+    if (mysqli_query($link, $updquery)) {
+        header('Location:'.$_SERVER['PHP_SELF']);
+    }
+    else {
+        echo "<p> Error: ".$updquery."<br/>".mysqli_error($link);
+    }
+    $_POST=array();
+}
+
 function updatereq($rid) {
 	global $link;
-    $processedDesc = str_replace(array("\\n","\n", "\r"), '<br/>',$_POST['desc']);
-    $processedRacc = str_replace(array("\\n","\n", "\r"), '<br/>',$_POST['rac']);
-	$updatereq = array($_POST['title'], $processedDesc, $_POST['rass'], $processedRacc);
+    $processedDesc = str_replace(array("\\n","\r\n", "\n"), '<br/>',$_POST['desc']);
+    $processedRacc = str_replace(array("\\n","\r\n", "\n"), '<br/>',$_POST['rac']);
+	$updatereq = array(htmlspecialchars(str_replace(array("\\n","\r\n", "\n"), ' ', $_POST['title']), ENT_QUOTES), htmlspecialchars($processedDesc, ENT_QUOTES), $_POST['rass'], htmlspecialchars($processedRacc, ENT_QUOTES));
 	$update = "UPDATE requisition SET title='$updatereq[0]', description='$updatereq[1]', risk_assessment='$updatereq[2]', risk_actions='$updatereq[3]' WHERE requisition_id=$rid";
 	if (mysqli_query($link, $update)) {
 		header('Location:'.$_SERVER['PHP_SELF']);
@@ -194,7 +207,7 @@ function insertLessons($day, $period, $teacher) {
 			while ( $lessonResult = mysqli_fetch_array($lesson_result, MYSQLI_ASSOC) ) {
 				$lesson = array($lessonResult['name'],  $lessonResult['subject'],  $lessonResult['room'], $lessonResult['lesson_id']);
 			}
-			$requisition_query = "SELECT title, requisition_id, description, risk_assessment, risk_actions FROM requisition WHERE lesson_id=$lesson[3]";
+			$requisition_query = "SELECT title, requisition_id, description, risk_assessment, risk_actions, done_bool FROM requisition WHERE lesson_id=$lesson[3]";
 			$requisition_result = mysqli_query( $link, $requisition_query);
 			while ( $requisition = mysqli_fetch_array($requisition_result, MYSQLI_ASSOC) ) {
 				$req_title=$requisition['title'];
@@ -202,10 +215,15 @@ function insertLessons($day, $period, $teacher) {
 				$req_desc = $requisition['description'];
 				$req_ras=$requisition['risk_assessment'];
 				$req_rac=$requisition['risk_actions'];
+				$req_done=$requisition['done_bool'];
 			}
 
 			if (isset($req_title)) {
-                echo '<td type="button" class="lesson" onclick="fillContent(\''."info".'\', \''.$req_title.'\', \''.$req_desc.'\', \''.$req_ras.'\', \''.$req_rac.'\', \''.$req_id.'\', \''.$lesson[0].'\', \''.$teacher.'\')">';
+                echo '<td ';
+                if ($req_done) {
+                    echo "id='lessonDone';";
+                }
+                echo 'type="button" class="lesson" onclick="fillContent(\''."info".'\', \''.htmlspecialchars($req_title, ENT_QUOTES).'\', \''.htmlspecialchars($req_desc, ENT_QUOTES).'\', \''.$req_ras.'\', \''.htmlspecialchars($req_rac, ENT_QUOTES).'\', \''.$req_id.'\', \''.$lesson[0].'\', \''.$teacher.'\',\''.$req_done.'\' )">';
 				echo '<span class="lessonInfo">', $lesson[0] , '<br>', $lesson[1], '<br>', $lesson[2], '</span>';
                 echo "<div class='reqContainer'><br/><span class='reqTitle'><b>$req_title</b></span>";
                 if (strcmp($req_ras, 'NO')){
@@ -224,7 +242,7 @@ function insertLessons($day, $period, $teacher) {
 			  echo "</td>";
 			}
 	    }
-		else { echo "<td class='empty'></td>"; }
+		else { echo "<td class='emptyLesson'></td>"; }
 }
 
 ?>

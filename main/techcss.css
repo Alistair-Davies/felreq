@@ -124,28 +124,6 @@
     cursor: pointer;
 }
 
-.cancel, .cancel2{
-	color: grey;
-	position:relative;
-    left: 50%;
-    transform: translate(-50%, 0%);
-	font-size: 18px;
-    display: inline-block;
-    -webkit-transition-duration: 0.4s;
-    padding:15px 32px;
-    text-align: center;
-    text-decoration: none;
-    border-radius:3px;
-    margin:0px 10px;
-}
-
-.cancel:hover, .cancel2:hover{
-	background-color: crimson;
-	cursor: pointer;
-    color:white;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24), 0 15px 40px 0 rgba(0,0,0,0.19);
-}
-
 .CreateRequisition {
 	background-color: DarkGrey;
     border:none;
@@ -170,20 +148,34 @@
 }
 
 .lesson:hover, .tableDay:hover {
-    background-color: AliceBlue;
+    background-color: AliceBlue !important;
     cursor: pointer;
+}
+
+#lessonDone {
+    background-color: #b4ecb4;
 }
 
 .teacherName:hover {
     background-color: lightblue;
     cursor: pointer;
 }
-.lesson, .lessonCreate, .empty {
+.lesson, .lessonCreate, .emptyLesson{
     line-height: 120%;
     width:10%;
     padding:0.5%;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #B4B1AE;
     overflow: hidden;
+}
+
+.emptyLesson {
+    background: repeating-linear-gradient(
+            125deg,
+            #EAF5FF,
+            #EAF5FF 2px,
+            #d2dce5 2px,
+            #d2dce5 15px
+    );
 }
 
 .reqTitle {
@@ -207,14 +199,16 @@
 
 .weekLetter p{
     text-align: center;
-    width:15%;
     position:relative;
     font-size: 50px;
     margin: unset;
     margin-bottom:0.5%;
+    font-family: Verdana, Geneva, sans-serif;
+    letter-spacing: 5px;
+    font-weight: 600;
 }
 
-#editButton, .removeButton, .updateButton, .createButton, .DefaultView, .clearReq {
+#editButton, .removeButton, .updateButton, .createButton, .DefaultView, .clearReq, .cancel2 {
     background-color: AliceBlue;
     border: none;
     border-radius: 3px;
@@ -226,6 +220,21 @@
     font-size: 16px;
     -webkit-transition-duration: 0.4s;
     margin:10px;
+    margin-bottom: unset;
+}
+
+#doneButton {
+    border-radius:100%;
+    font-size:17px;
+    color: GrayText;
+    display:inline-block;
+    background-color: AliceBlue;
+    float:right;
+    width:50px;
+    height:50px;
+    border:1px solid #B4B1AE;
+    text-align:center;
+    margin:10px;
 }
 
 #editButton {
@@ -234,17 +243,13 @@
     transform: translate(-50%, 0%);
 }
 
-
 .createButton {
     position:relative;
     left:50%;
     transform: translate(-50%, 0%);
 }
 .updateButton {
-    position:relative;
-    left:50%;
-    margin-bottom:0;
-    transform: translate(-50%, 0%);
+    margin-left: 45%;
 }
 .removeForm {
     display:inline-block;
@@ -253,21 +258,40 @@
     transform: translate(-50%, 0%);
 }
 
+.markDone {
+    display:inline-block;
+    float:right;
+}
+
+.cancel2 {
+    float:right;
+    position:relative;
+}
+
 #desc, #rac, #title, #ras {
     border-left: 0.5px black dotted;
     padding-left: 10px;
     margin-top:1%;
 }
 
-#editButton:hover, .removeButton:hover, .updateButton:hover, .createButton:hover, .DefaultView:hover {
+form {
+    margin-bottom: unset;
+}
+
+#editButton:hover, .removeButton:hover, #doneButton:hover, .cancel2:hover, .updateButton:hover, .createButton:hover, .DefaultView:hover {
     cursor:pointer;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24), 0 15px 40px 0 rgba(0,0,0,0.19);
 }
 
-.removeButton:hover, .clearReq:hover {
+.removeButton:hover, .clearReq:hover, .cancel2:hover {
     background-color: crimson;
     color:white;
     cursor:pointer
+}
+
+#doneButton:hover {
+    background-color: darkslateblue;
+    color:white;
 }
 
 .DefaultView {

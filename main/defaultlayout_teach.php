@@ -161,7 +161,6 @@ function openCity(evt, weekview) {
             var title = document.getElementById('reqfor');
             document.getElementById('lesson_id').value=d;
             title.innerHTML=t;
-            title.innerHTML=t;
             cancel.onclick = function() {
                 document.getElementById('createtitle').value='';
                 document.getElementById('createdesc').value='';
@@ -175,7 +174,7 @@ function openCity(evt, weekview) {
             modal3.style.display = "block";
             document.getElementById('edTitle').innerHTML=lid;
             document.getElementById('editreqid').value=rid;
-            document.getElementById('edittitle').value=t;
+            document.getElementById('edittitle').value=t.replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
             document.getElementById('editdesc').value=d.replace(/&lt;br\/&gt;/g, '\n').replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
             if (ras =="YES") { document.getElementById('editrassyes').checked="checked"; }
             else { document.getElementById('editrassno').checked="checked"; }

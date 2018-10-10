@@ -6,6 +6,7 @@ if (isset($_POST['lesson_id'])){insertreq();}
 if (isset($_POST['remrid'])){removereq($_POST['remrid']);}
 if (isset($_POST['updrid'])){updatereq($_POST['updrid']);}
 if (isset($_POST['remweek'])){remove($_POST['remweek']);}
+if (isset($_POST['doneID']) && isset($_POST['doneBool'])){markDone($_POST['doneID'], $_POST['doneBool']);}
 $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
 ?>
 <div class="tab">
@@ -101,7 +102,7 @@ $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
         window.location.assign(loc);
     }
 
-    function fillContent(type,t,d,ras,rac,rid,lid,tid) {
+    function fillContent(type,t,d,ras,rac,rid,lid,tid,rdone) {
 
         close1.onclick = function() {
             modal.style.display = "none";
@@ -123,14 +124,24 @@ $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
             var rass = document.getElementById('ras');
             var racc = document.getElementById('rac');
             var editButton = document.getElementById('editButton');
+            var doneButton = document.getElementById('doneButton');
             document.getElementById('infTitle').innerHTML=lid;
             document.getElementById('tid').innerHTML=tid;
 
             document.getElementById('rid').value=rid;
+            document.getElementById('doneid').value=rid;
+            if (rdone==0) {
+               doneButton.value="\u2611";
+               document.getElementById('doneEval').value = "TRUE";
+            }
+            else {
+                doneButton.value="\u2610";
+                document.getElementById('doneEval').value = "FALSE";
+            }
             title.innerHTML=t;
-            desc.innerHTML=d;
+            desc.innerHTML=d.replace(/&lt;br\/&gt;/g, '<br/>');;
             rass.innerHTML=ras;
-            racc.innerHTML=rac;
+            racc.innerHTML=rac.replace(/&lt;br\/&gt;/g, '<br/>');;
             editButton.onclick = function() { fillContent('edit', t, d, ras, rac, rid, lid, tid); };
 
         }
@@ -149,11 +160,11 @@ $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
             modal3.style.display = "block";
             document.getElementById('edTitle').innerHTML=lid;
             document.getElementById('editreqid').value=rid;
-            document.getElementById('edittitle').value=t;
-            document.getElementById('editdesc').value=d.replace(/<br\/>/g, '\n');
+            document.getElementById('edittitle').value=t.replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+            document.getElementById('editdesc').value=d.replace(/&lt;br\/&gt;/g, '\n').replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
             if (ras =="YES") { document.getElementById('editrassyes').checked="checked"; }
             else { document.getElementById('editrassno').checked="checked"; }
-            document.getElementById('editracc').value=rac.replace(/<br\/>/g, '\n');
+            document.getElementById('editracc').value=rac.replace(/&lt;br\/&gt;/g, '\n').replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 
             cancel2.onclick = function() {
                 modal3.style.display = "none";
