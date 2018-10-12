@@ -10,8 +10,8 @@ if (isset($_POST['doneID']) && isset($_POST['doneBool'])){markDone($_POST['doneI
 $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
 ?>
 <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'thisweek')">This Week <?php echo $weekdates[0][0], ' - ', $weekdates[0][6]; ?></button>
-    <button class="tablinks" onclick="openCity(event, 'nextweek')">Next Week <?php echo $weekdates[1][0], ' - ', $weekdates[1][6]; ?></button>
+    <button class="tablinks" onclick="openWeek(event, 'thisweek')">This Week <?php echo $weekdates[0][0], ' - ', $weekdates[0][6]; ?></button>
+    <button class="tablinks" onclick="openWeek(event, 'nextweek')">Next Week <?php echo $weekdates[1][0], ' - ', $weekdates[1][6]; ?></button>
 </div>
 <div class="modals">
     <?php
@@ -37,16 +37,12 @@ $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
     ?>
 </div>
 
-<div id="Tokyo" class="tabcontent">
-    <h3>Tokyo</h3>
-    <p>Tokyo is the capital of Japan.</p>
-</div>
 
 <script>
     var tab = sessionStorage.getItem("sessionTab");
-    if (tab) { openCity(event, tab); }
+    if (tab) { openWeek(event, tab); }
 
-    function openCity(evt, weekview) {
+    function openWeek(evt, weekview) {
         var i, tabcontent, tablinks;
         sessionStorage.sessionTab = weekview;
 
@@ -61,7 +57,6 @@ $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
         }
 
         document.getElementById(weekview).style.display = "block";
-        evt.currentTarget.className += " active";
     }
 </script>
 

@@ -11,8 +11,8 @@
 
 
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'thisweek')">This Week <?php echo $weekdates[0][0], ' - ', $weekdates[0][6]; ?></button>
-  <button class="tablinks" onclick="openCity(event, 'nextweek')">Next Week <?php echo $weekdates[1][0], ' - ', $weekdates[1][6]; ?></button>
+  <button class="tablinks" onclick="openWeek(event, 'thisweek')">This Week <?php echo $weekdates[0][0], ' - ', $weekdates[0][6]; ?></button>
+  <button class="tablinks" onclick="openWeek(event, 'nextweek')">Next Week <?php echo $weekdates[1][0], ' - ', $weekdates[1][6]; ?></button>
 </div>
 
 
@@ -72,16 +72,12 @@
   ?> 
 </div>
 
-<div id="Tokyo" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
-</div>
 
 <script>
   var tab = sessionStorage.getItem("sessionTab");
-  if (tab) { openCity(event, tab); }
+  if (tab) { openWeek(event, tab); }
 
-function openCity(evt, weekview) {
+function openWeek(evt, weekview) {
     var i, tabcontent, tablinks;
 	sessionStorage.sessionTab = weekview;
 
@@ -96,7 +92,6 @@ function openCity(evt, weekview) {
     }
 
     document.getElementById(weekview).style.display = "block";
-    evt.currentTarget.className += " active";
 }
 </script>
 
@@ -115,9 +110,9 @@ function openCity(evt, weekview) {
         var racc = document.getElementById('createracc');
         if (info[2] =="YES") { document.getElementById('createyes').checked="checked"; }
         else { document.getElementById('createno').checked="checked"; }
-        tit.value = info[0];
-        des.value = info[1];
-        racc.value = info[3];
+        tit.value = info[0].replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        des.value = info[1].replace(/&lt;br\/&gt;/g, '\n').replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        racc.value = info[3].replace(/&lt;br\/&gt;/g, '\n').replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
     }
 
     function fillContent(type,t,d,ras,rac,rid,lid) {

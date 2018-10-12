@@ -31,9 +31,9 @@ CREATE TABLE lesson (
 CREATE TABLE requisition (
   requisition_id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(40),
-  description VARCHAR(1000),
+  description TEXT NOT NULL,
   risk_assessment ENUM('YES', 'NO'),
-  risk_actions VARCHAR(400), 
+  risk_actions TEXT NOT NULL, 
   lesson_id INT,
   done_bool tinyint(1),
   PRIMARY KEY(requisition_id),

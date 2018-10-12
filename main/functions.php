@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['teach'])) {
+        header("Location:login.php");
+    }
 
     $dbname = 'felstedreq';
     $dbuser = 'root';
@@ -107,9 +111,9 @@ function generateModal($type) {
 		echo "<span class='buttonContainer'><input type='submit' class=createButton value='Create'/>";
 		echo "<span class=\"cancel\">Cancel</span>";
         if (isset($_POST['copyinfo'])) {
-            $p = json_encode(explode('||',$_POST['copyinfo']));
+            $p = htmlspecialchars(json_encode(explode('||',$_POST['copyinfo'])), ENT_QUOTES);
 
-            echo "<button id='pasteButton' class='fa' onclick='pasteInfo($p); return true;'> Paste &#xf0ea</button>";
+            echo "<button type='button' id='pasteButton' class='fa' onclick='pasteInfo($p); return true;'> Paste &#xf0ea</button>";
         }
         echo "</span></form>";
 		echo "</div>";
@@ -121,7 +125,7 @@ function generateModal($type) {
 		echo "<div class=\"modal-content\">";
 		echo "<span><form action='' method='POST'>";
         echo "<span class='edTitle'><h3>Editing requisition for: <b><span id=edTitle></span></b></h3> </span><input id=editreqid type='hidden' name='updrid' value=''/>";
-		echo "<br/><b>Title:</b><br/><input id=edittitle type='text' name='title' value='' required/><br/>";
+		echo "<br/><b>Title:</b><br/><input id=edittitle maxlength='40' type='text' name='title' value='' required/><br/>";
 		echo "<b>Description:</b><br/><textarea id='editdesc' name='desc' rows='5' cols='50' value='' required></textarea><br/>";
 		echo "<b>Risk Assessment:  </b><input id=editrassyes type='radio' name='rass' value='YES'/>YES <input id=editrassno type='radio' name='rass' value='NO'/> NO<br/><br/>";
 		echo "<b>Risk Actions:</b><br/><textarea id='editracc' rows='5' cols='50' value='' name='rac' required></textarea><br/>";
@@ -129,7 +133,6 @@ function generateModal($type) {
 		echo "<span class='cancel2'>Cancel</span>";
 		echo "</span>";
 		echo "</div></div>";
-		  
 	  }
 	  
 }

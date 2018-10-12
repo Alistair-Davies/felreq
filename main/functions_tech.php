@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['tech'])) {
+        header("Location:login.php");
+    }
+
     $dbname = 'felstedreq';
     $dbuser = 'root';
     $dbhost = 'localhost';
@@ -119,7 +124,7 @@ function generateModal($type) {
 		echo "<form action='' method='post'>";
 		echo "<span class='crTitle'><h3>Creating requisition for: <b><span id=reqfor></span></b></h3> </span>";
 		echo "<input id=lesson_id type='hidden' name='lesson_id' value=''/><br/>";
-		echo "<b>Title:</b><br/> <input id='createtitle' type='text' name='title' value=''/><br/>";
+		echo "<b>Title:</b><br/> <input id='createtitle' maxlength='40' type='text' name='title' value=''/><br/>";
 		echo "<b>Description:</b><br/><textarea id='createdesc' name='desc' value='' rows='5' cols='50'></textarea><br/>";
 		echo "<b>Risk Assessment:  </b><input type='radio' name='rass' value='YES'/> YES<input type='radio' name='rass' value='NO'/> NO<br/><br/>";
 		echo "<b>Risk Actions:</b><br/><textarea id='createracc' rows='5' cols='50' value='' name='rac'></textarea><br/>";
@@ -132,8 +137,8 @@ function generateModal($type) {
 		echo "<div class=\"modal-content\">";
 		echo "<span><form action='' method='POST'>";
 		echo "<span class='edTitle'><h3>Editing requisition for: <b><span id=edTitle></span></b></h3> </span><input id=editreqid type='hidden' name='updrid' value=''/>";
-		echo "<br/><b>Title:</b><br/><input id=edittitle type='text' name='title' value='' required/><br/>";
-		echo "<b>Description:</b><br/><textarea id='editdesc' name='desc' rows='5' cols='50' value='' required></textarea><br/>";
+		echo "<br/><b>Title:</b><br/><input id=edittitle maxlength='40' type='text' name='title' value='' required/><br/>";
+		echo "<b>Description:</b><br/><textarea id='editdesc' name='desc'  rows='5' cols='50' value='' required></textarea><br/>";
 		echo "<b>Risk Assessment:  </b><input id=editrassyes type='radio' name='rass' value='YES'/>YES <input id=editrassno type='radio' name='rass' value='NO'/> NO<br/><br/>";
 		echo "<b>Risk Actions:</b><br/><textarea id='editracc' rows='5' cols='50' value='' name='rac' required></textarea><br/>";
         echo "<span class='buttonContainer'><input class=updateButton type='submit' value='Update'/></form>";
