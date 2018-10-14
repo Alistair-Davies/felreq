@@ -12,6 +12,12 @@
     mysqli_select_db( $link, $dbname )
     or die("Could not open the db '$dbname'");
 
+function do_logging($message, $level){
+    $date = date("Y-m-d h:m:s");
+    $file = __FILE__;
+    error_log("[ $date ] [ $level ] [ $file ] $message".PHP_EOL,3,"/var/log/nginx/felreq");
+}
+
 function getStartAndEndDate($weeknum, $year) {
 		$time = strtotime("1 January $year", time());
 		$day = date('w', $time);

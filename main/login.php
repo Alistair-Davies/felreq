@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <style>
       .container{
@@ -91,6 +90,12 @@ or die( "Unable to Connect to '$dbhost'" );
 mysqli_select_db( $link, $dbname )
 or die("Could not open the db '$dbname'");
 
+function do_logging($message, $level){
+    $date = date("Y-m-d h:m:s");
+    $file = __FILE__;
+    error_log("[ $date ] [ $level ] [ $file ] $message".PHP_EOL,3,"/var/log/nginx/felreq");
+}
+
 if (isset($_POST['usr'])) {
     $usr =  $_POST['usr'];
 
@@ -103,16 +108,19 @@ if (isset($_POST['usr'])) {
     if (mysqli_num_rows($result) == 1){
         session_start();
         $_SESSION['teach'] = $usr;
+        do_logging("Teacher logged in as '$usr'", "INFO");
         header ("Location: teacher_$usr.php");
         exit();
     }
     else if (mysqli_num_rows($result2) == 1) {
         session_start();
         $_SESSION['tech'] = $usr;
+        do_logging("Technician logged in as '$usr'", "INFO");
         header ("Location: tech_$usr.php");
         exit();
     }
     else {
+        do_logging("Failed login attempt with '$usr'", "WARNING");
         $f = 1;
     }
 }
