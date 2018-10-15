@@ -83,10 +83,11 @@ $_SESSION = array();
 session_destroy();
 
 $dbname = 'felstedreq';
-$dbuser = 'root';
+$dbuser = 'admin';
 $dbhost = 'localhost';
-$link = mysqli_connect( $dbhost, $dbuser)
-or die( "Unable to Connect to '$dbhost'" );
+$dbpass = '1234';
+$link = mysqli_connect( $dbhost, $dbuser, $dbpass, $dbname)
+or die( mysqli_connect_error() );
 mysqli_select_db( $link, $dbname )
 or die("Could not open the db '$dbname'");
 
