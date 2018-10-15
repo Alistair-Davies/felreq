@@ -16,10 +16,10 @@ def csv_from_excel():
 def listTeachers(data):
     teachers=[]
     numrows = len(data)
-    row = 4
+    row = 2
     while (row < numrows):
         teachers.append(data[row][0].strip())
-        row+=2
+        row+=1
     return teachers
 
 def getTeacherLesson(teacher, data):
@@ -34,13 +34,13 @@ def getTeacherLesson(teacher, data):
         if (column%7==0):
             c+=1
             day=days[c]
-            #print(day)
+           # print(day)
             continue
-        elif (data[column] == "\r\n\r\n" or data[column] == ''):
+        elif (data[column] == "\n\n" or data[column] == ''):
             continue
         else:
             period = str(column%7)+"||"
-            less = period + day + data[column].replace('\r\n', '||')
+            less = period + day + data[column].replace('\n', '||')
             lessons.append(less)
         
     return lessons
@@ -63,6 +63,7 @@ def processLesson(lesson, teacher):
         return 0
     else:
       try:
+          #print(lesson)
           d = lesson.split("||")
       except:
           print("Not a valid lesson: "+lesson.replace('||', ' '))
@@ -96,12 +97,13 @@ csv_from_excel()
 with open('timetable.csv','r', newline='') as f:
     reader = csv.reader(f)
     data=list(reader)
+   # print(data)
     teachers = listTeachers(data)
-    row = 4
+    row = 2
     teacherLessons = {}
     for teacher in teachers:
         teacherLessons[teacher] = getTeacherLesson(teacher, data[row])
-        row+=2
+        row+=1
     f.close()
 
 chemTeachers = ["AJP", "HJM", "LEB", "SMG"]
