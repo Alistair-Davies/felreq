@@ -23,9 +23,11 @@ function remove($w) {
     global $link;
     $removequery = " DELETE FROM requisition WHERE lesson_id in (SELECT lesson_id FROM lesson WHERE week='$w');";
     if (mysqli_query($link, $removequery)) {
+        do_logging("Successful MYSQL query: $removequery", "INFO");
         header('Location:'.$_SERVER['PHP_SELF']);
     }
     else {
+        do_logging("Unsuccessful MYSQL query: $removequery", "ERROR");
         echo "<p> Error: ".$removequery."<br/>".mysqli_error($link);
     }
 }
@@ -161,9 +163,11 @@ function insertreq() {
 	$newreq = array($_POST['lesson_id'], htmlspecialchars(str_replace(array("\\n","\r\n", "\n"), ' ', $_POST['title']), ENT_QUOTES), htmlspecialchars($processedDesc, ENT_QUOTES),$_POST['rass'], htmlspecialchars($processedRacc, ENT_QUOTES));
 	$insert = "INSERT INTO requisition VALUES (DEFAULT, '$newreq[1]', '$newreq[2]', '$newreq[3]', '$newreq[4]', $newreq[0], FALSE);";
     if (mysqli_query($link, $insert)) {
+        do_logging("Successful MYSQL query: $insert", "INFO");
 		header('Location:'.$_SERVER['PHP_SELF']);
 	}
 	else {
+        do_logging("Unsuccessful MYSQL query: $insert", "ERROR");
 		echo "<p> Error: ".$insert."<br/>".mysqli_error($link);
 	}
 	$_POST=array();
@@ -173,9 +177,11 @@ function removereq($rid) {
     global $link;
 	$remove = "DELETE FROM requisition WHERE requisition_id=$rid;";
 	if (mysqli_query($link, $remove)) {
+        do_logging("Successful MYSQL query: $remove", "INFO");
 		header('Location:'.$_SERVER['PHP_SELF']);
 	}
 	else {
+        do_logging("Unsuccessful MYSQL query: $remove", "ERROR");
 		echo "<p> Error: ".$remove."<br/>".mysqli_error($link);
 	}
 	$_POST=array();
@@ -185,9 +191,11 @@ function markDone($id, $doneBool) {
     global $link;
     $updquery = "UPDATE requisition set done_bool=$doneBool WHERE requisition_id=$id;";
     if (mysqli_query($link, $updquery)) {
+        do_logging("Successful MYSQL query: $updquery", "INFO");
         header('Location:'.$_SERVER['PHP_SELF']);
     }
     else {
+        do_logging("Unsuccessful MYSQL query: $updquery", "ERROR");
         echo "<p> Error: ".$updquery."<br/>".mysqli_error($link);
     }
     $_POST=array();
@@ -200,9 +208,11 @@ function updatereq($rid) {
 	$updatereq = array(htmlspecialchars(str_replace(array("\\n","\r\n", "\n"), ' ', $_POST['title']), ENT_QUOTES), htmlspecialchars($processedDesc, ENT_QUOTES), $_POST['rass'], htmlspecialchars($processedRacc, ENT_QUOTES));
 	$update = "UPDATE requisition SET title='$updatereq[0]', description='$updatereq[1]', risk_assessment='$updatereq[2]', risk_actions='$updatereq[3]' WHERE requisition_id=$rid";
 	if (mysqli_query($link, $update)) {
+        do_logging("Successful MYSQL query: $update", "INFO");
 		header('Location:'.$_SERVER['PHP_SELF']);
 	}
 	else {
+        do_logging("Unsuccessful MYSQL query: $update", "ERROR");
 		echo "<p> Error: ".$update."<br/>".mysqli_error($link);
 	}
 	$_POST=array();
