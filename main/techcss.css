@@ -16,8 +16,20 @@
     border-right:1px #ccc solid
 }
 
-.tab button:hover {
+.tab form {
+    float:right;
+}
+
+.tab form input {
+    background-color: inherit;
+    padding: 14px 16px;
+    border:none;
+    font-size: 18px;
+}
+
+.tab button:hover, .tab form input:hover {
     background-color: lightblue;
+    cursor: pointer;
 }
 
 .tab button.active {

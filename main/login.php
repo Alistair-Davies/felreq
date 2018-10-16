@@ -1,5 +1,6 @@
 <html>
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       .container{
           width:30%;
@@ -149,7 +150,7 @@ if (isset($_POST['usr'])) {
             <label for="usr"><b>ID:</b></label>
             <input type="text" id="usr" placeholder="Enter Teacher/Technician ID" name="usr" required>
             <br/>
-            <button id="loginButton" type="submit" onclick="return validate()" >Login</button>
+            <button class="fa" id="loginButton" type="submit" onclick="return validate()" >Login  &#xf090;</button>
         </form>
 
         <?php if (isset($f)) {echo ' <br/><br/><p id=fail> That ID was not recognised. Please try again.</p>';} ?>
