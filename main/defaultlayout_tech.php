@@ -8,6 +8,13 @@ if (isset($_POST['remrid'])){removereq($_POST['remrid']);}
 if (isset($_POST['updrid'])){updatereq($_POST['updrid']);}
 if (isset($_POST['remweek'])){remove($_POST['remweek']);}
 if (isset($_POST['doneID']) && isset($_POST['doneBool'])){markDone($_POST['doneID'], $_POST['doneBool']);}
+if (isset($_POST['saveweekID'])) {
+    $tmpwid = $_POST['saveweekID'];
+    $tmpweekdates = $_POST['saveweek'];
+    exec("sudo -u www-data python /home/pi/repos/felreq/saveWeek.py $tmpwid $tmpweekdates 2>&1", $output);
+    do_logging("Output of call to python saveWeek.py: $output", "INFO");
+    $_POST = array();
+}
 $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
 ?>
 <div class="tab">
