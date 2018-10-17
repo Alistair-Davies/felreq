@@ -220,7 +220,7 @@
     font-weight: 600;
 }
 
-#editButton, .removeButton, .updateButton, .createButton, .DefaultView, .clearReq, .cancel2 {
+#editButton, .removeButton, .updateButton, .createButton, .DefaultView, .clearReq, .cancel2, .saveWeek {
     background-color: AliceBlue;
     border: none;
     border-radius: 3px;
@@ -290,7 +290,7 @@ form {
     margin-bottom: unset;
 }
 
-#editButton:hover, .removeButton:hover, #doneButton:hover, .cancel2:hover, .updateButton:hover, .createButton:hover, .DefaultView:hover {
+#editButton:hover, .removeButton:hover, #doneButton:hover, .cancel2:hover, .updateButton:hover, .createButton:hover, .DefaultView:hover, .saveWeek:hover {
     cursor:pointer;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24), 0 15px 40px 0 rgba(0,0,0,0.19);
 }
@@ -313,16 +313,20 @@ form {
     margin-bottom: 7.5px;
 }
 
-.clearReq {
+.clearReq, .saveWeek {
     border-radius:100px;
 }
 
-.clearReqForm {
+.clearReqForm, .saveForm {
     display: inline-block;
     position:relative;
     float:right;
     right:4.5%;
     margin-bottom: 7.5px;
+}
+
+.saveForm {
+    right: 10% !important;
 }
 
 .crTitle, .edTitle, .infTitle {

@@ -71,10 +71,6 @@ $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
     var cancel = document.getElementsByClassName("cancel")[0];
     var cancel2 = document.getElementsByClassName("cancel2")[0];
 
-    function clearReq(w) {
-
-    }
-
     function focusDay(d) {
         var loc = window.location.href;
         if (loc.indexOf("?")>-1){
