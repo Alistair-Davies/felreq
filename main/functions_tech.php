@@ -85,11 +85,12 @@ function generateTable($w) {
     }
     else {
         $teachers = array($_GET['teachers']);
-    }
-
+	}
+	
+    $saveDates = $weekdates[$w][0].$weekdates[$w][6];
     echo "<button onclick=focusDefault() class=DefaultView>Default Week View</button>";
     echo "<form class='clearReqForm' action='' method='POST'><input id=wid type='hidden' name='remweek' value=$week /><input onclick=\"return confirm('Are you sure? This will remove this weeks requisitions.');\" class='clearReq' type='submit' value='Clear Week'/></form>";
-    echo "<form class='saveForm' action='' method='POST'><input id=wid type='hidden' name='saveweekID' value=$week /><input type='hidden' name='saveweek' value='$weekdates[0].$weekdates[6]'><input class='saveWeek' type='submit' value='Save Week'/></form>";
+    echo "<form class='saveForm' action='' method='POST'><input id=wid type='hidden' name='saveweekID' value=$week /><input type='hidden' name='saveweek' value='$saveDates'><input class='saveWeek' type='submit' value='Save Week'/></form>";
     echo "<table class='timetable'><tr><th colspan='2'></th>";
     foreach ($teachers as $tea) {
     echo "<th class=teacherName type='button' onclick=focusTeacher('$tea')>$tea</th>";

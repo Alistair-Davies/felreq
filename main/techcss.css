@@ -325,10 +325,6 @@ form {
     margin-bottom: 7.5px;
 }
 
-.saveForm {
-    right: 10% !important;
-}
-
 .crTitle, .edTitle, .infTitle {
     position:relative;
     left: 50%;
