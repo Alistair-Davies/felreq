@@ -8,6 +8,48 @@
     max-height: 100%;
 }
 
+.header {
+    padding: 0.5px 0;
+	text-align: center;
+	font-family: Verdana, Geneva, sans-serif;
+    letter-spacing: 5px;
+    font-weight: 600;
+	font-size:20px;
+}
+
+.weekLink {
+	border: 1.5px solid darkorange;
+    font-size: 20px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.backButton {
+	background-color: AliceBlue;
+    border: none;
+    border-radius: 3px;
+    color: GrayText;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s;	
+    position:relative;
+    left:5%;
+    margin-bottom: 7.5px;
+}
+
+.listOflinks {
+	position:relative;
+	top:15%;
+	left:45%;
+	padding:30px;
+	background-color:aliceblue;
+	transform: translate(-45%, -15%);
+	
+}
+
 .timetable td {
 	border-bottom: 1px #B4B1AE solid;
 }

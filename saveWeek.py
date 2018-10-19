@@ -42,7 +42,7 @@ f.close()
 filename = "weekLinks.php"
 
 weekOption = "<form class='historyLink' method='GET' action=''>\
-<input type='hidden' name='view' value='"+date+"'/><input type=submit value='"+date+"'/>\
+<input type='hidden' name='view' value='"+date+"'/><input class='weekLink' type=submit value='"+date+"'/>\
 </form>"
 
 if not os.path.exists(filename):

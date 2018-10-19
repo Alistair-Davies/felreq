@@ -20,13 +20,14 @@
         or die( mysqli_connect_error() );
         mysqli_select_db( $link, $dbname )
         or die("Could not open the db '$dbname'");
-
-        echo "<div class='header'><h1>History: $_GET['view']</h1></div>";
-        echo '<form method="GET" action=""><input type="submit" value="back"/></form>';
+        
+		$historydate = $_GET['view'];
+        echo "<div class='header'><h1>History: $historydate</h1></div>";
+        echo '<form method="GET" action=""><input class="backButton" type="submit" value="back"/></form>';
 
         generateModal();
-        insertHistory($_GET['view']);
-        generateTable($_GET['view']);
+        insertHistory($historydate);
+        generateTable($historydate);
     }
 ?>
 
