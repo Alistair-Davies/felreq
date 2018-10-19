@@ -1,0 +1,178 @@
+.timetable {
+	width:90%;
+    min-width: 1200px;
+	border-collapse: collapse;
+    left: 5%;
+    position: relative;
+    margin-bottom:25px;
+    max-height: 100%;
+}
+
+.timetable td {
+	border-bottom: 1px #B4B1AE solid;
+}
+
+.timetable tr:nth-child(7){
+    border-bottom: 3px #B4B1AE solid;
+}
+
+.timetable th {
+    background-color:AliceBlue;
+}
+
+.tableDay {
+    width: 2.5%;
+    text-align: center;
+    border-bottom: 3px #B4B1AE solid !important;
+}
+
+.tablePeriod {
+    width:1%;
+    text-align: center;
+    border-left: 1px #B4B1AE  solid;
+    border-right: 1px #B4B1AE solid;
+    padding-top:2px;
+}
+
+.timetable tbody {
+    background-color: #EEEDEB;
+}
+.timetable tbody:nth-child(even) {
+    background-color: #F5F4F3;
+}
+
+.modal {
+    display: none;
+	position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 2.5%;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.modal-content b {
+    font-size: 20px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.lesson:hover {
+    background-color: AliceBlue !important;
+    cursor: pointer;
+}
+
+#lessonDone {
+    background-color: #b4ecb4;
+}
+
+.lesson, .lessonCreate, .emptyLesson{
+    line-height: 120%;
+    width:10%;
+    padding:0.5%;
+    border-left: 1px solid #B4B1AE;
+    overflow: hidden;
+}
+
+.emptyLesson {
+    background: repeating-linear-gradient(
+            125deg,
+            #EAF5FF,
+            #EAF5FF 2px,
+            #d2dce5 2px,
+            #d2dce5 15px
+    );
+}
+
+.reqTitle {
+    text-align: center;
+    display:inline-block;
+    max-width: 75%;
+    text-overflow: ellipsis;
+    float:left;
+    margin-left:7.5%;
+}
+
+.lessonInfo {
+    display:inline-block;
+    float:left;
+    width:25%;
+    white-space: nowrap;
+    margin-right:5%;
+    position: relative;
+    top:50%;
+}
+
+.markDone {
+    display:inline-block;
+    float:right;
+}
+
+#desc, #rac, #title, #ras {
+    border-left: 0.5px black dotted;
+    padding-left: 10px;
+    margin-top:1%;
+}
+
+form {
+    margin-bottom: unset;
+}
+
+.infTitle {
+    position:relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size:20px;
+    display:inline-block;
+    text-align:center;
+}
+
+.infTitle h3 {
+    margin:0;
+    font-weight:normal;
+}
+
+.reqTick, .reqCross {
+    border-radius:100%;
+    font-size:17px;
+    padding:2px 4px;
+    color:white;
+    display:inline-block;
+    float:right;
+}
+
+.reqTick {
+    background-color: green;
+}
+
+.reqCross {
+    background-color: indianred;
+}
+
+.reqContainer {
+    display:inline-block;
+    width:70%;
+    float:right
+}

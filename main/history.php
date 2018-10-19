@@ -1,6 +1,6 @@
 
 <head>
-    <link rel="stylesheet" type="text/css" href="techcss.css"/> 
+    <link rel="stylesheet" type="text/css" href="historycss.css"/> 
 </head>
 
 <?php
@@ -58,14 +58,10 @@
             document.getElementById('infTitle').innerHTML=lid;
             document.getElementById('tid').innerHTML=tid;
 
-            document.getElementById('rid').value=rid;
-            document.getElementById('doneid').value=rid;
-
             title.innerHTML=t;
             desc.innerHTML=d.replace(/&lt;br\/&gt;/g, '<br/>');;
             rass.innerHTML=ras;
             racc.innerHTML=rac.replace(/&lt;br\/&gt;/g, '<br/>');;
-            editButton.onclick = function() { fillContent('edit', t, d, ras, rac, rid, lid, tid); };
         }
 
     }

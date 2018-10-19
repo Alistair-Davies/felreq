@@ -46,13 +46,13 @@ function generateTable($w) {
     
     echo "<table class='timetable'><tr><th colspan='2'></th>";
     foreach ($teachers as $tea) {
-        echo "<th class=teacherName type='button'>$tea</th>";
+        echo "<th class=teacherName>$tea</th>";
     }
     echo "</tr>";
     $d = 0;
     foreach ($days as $day) {
         echo "<tbody>";
-        echo "<td type='button' class='tableDay' rowspan='7'> $day<br/>";
+        echo "<td class='tableDay' rowspan='7'> $day<br/>";
         echo "</td>";
         for ($x = 1; $x <= 6; $x++) {
             echo "<tr><td class='tablePeriod'>$x</td>";
