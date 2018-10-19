@@ -6,11 +6,11 @@
 <?php
     require("functions_history.php");
     if (!isset($_GET['view'])) {
-		echo "<span class='histContainer'><h1>History Archives</h1>";
-        echo "<span class='listOfinks'>";
+		echo "<div class='histContainer'><h1>History Archives</h1>";
+        echo "<div class='listOfinks'>";
         include("weekLinks.php");
-        echo "</span>";
-		echo "</span>";
+        echo "</div>";
+		echo "</div>";
     }
     else {
         $dbname = 'felstedreq';
