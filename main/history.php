@@ -6,7 +6,7 @@
 <?php
     require("functions_history.php");
     if (!isset($_GET['view'])) {
-        //some sort of header
+		echo "<div class='header'><h1>History Archives</h1></div>"
         echo "<div class='listOflinks'>";
         include("weekLinks.php");
         echo "</div>";
@@ -21,8 +21,8 @@
         mysqli_select_db( $link, $dbname )
         or die("Could not open the db '$dbname'");
 
-        echo '<div class="header">';
-        echo '<form method="GET" action=""><input type="submit" value="back"/></form></div>';
+        echo "<div class='header'><h1>History: $_GET['view']</h1></div>"
+        echo '<form method="GET" action=""><input type="submit" value="back"/></form>';
 
         generateModal();
         insertHistory($_GET['view']);
