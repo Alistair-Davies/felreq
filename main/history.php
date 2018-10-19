@@ -19,7 +19,51 @@
 
         echo '<div class="header">';
         echo '<form method="GET" action=""><input type="submit" value="back"/></form></div>';
+
+        generateModal();
         insertHistory($_GET['view']);
         generateTable($_GET['view']);
     }
 ?>
+
+<script>
+    var close1 = document.getElementsByClassName("close")[0];
+    var modal = document.getElementById('myModal');
+
+    function fillContent(type,t,d,ras,rac,rid,lid,tid,rdone) {
+
+        close1.onclick = function() {
+            modal.style.display = "none";
+            document.getElementsByTagName("body")[0].style ='overflow:visible';
+        };
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.getElementsByTagName("body")[0].style ='overflow:visible';
+            }
+        };
+
+        if (type == "info") {
+            modal.style.display = "block";
+            document.getElementsByTagName("body")[0].style ='overflow:hidden';
+            var title = document.getElementById('title');
+            var desc = document.getElementById('desc');
+            var rass = document.getElementById('ras');
+            var racc = document.getElementById('rac');
+            document.getElementById('infTitle').innerHTML=lid;
+            document.getElementById('tid').innerHTML=tid;
+
+            document.getElementById('rid').value=rid;
+            document.getElementById('doneid').value=rid;
+
+            title.innerHTML=t;
+            desc.innerHTML=d.replace(/&lt;br\/&gt;/g, '<br/>');;
+            rass.innerHTML=ras;
+            racc.innerHTML=rac.replace(/&lt;br\/&gt;/g, '<br/>');;
+            editButton.onclick = function() { fillContent('edit', t, d, ras, rac, rid, lid, tid); };
+        }
+
+    }
+
+</script>

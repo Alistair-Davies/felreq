@@ -17,6 +17,15 @@ function do_logging($message, $level){
     error_log("[ $date ] [ $level ] [ $file ] $message".PHP_EOL,3,"/var/log/nginx/felreq");
 }
 
+function generateModal()
+{
+    echo "<div id='myModal' class='modal'>";
+    echo "<div class=\"modal-content\"><span class=\"close\">&times;</span>";
+    echo "<span class='infTitle'><h3>Requisition for: <b><span id=infTitle></span><br/></b>from: <b><span id='tid'></span></b></h3> </span>";
+    echo "<span><br/><b>Title:</b> <div id=title></div><br><b>Description: </b><div id=desc></div><br><b> Risk Assessment:</b> <div id=ras></div><br><b> Risk Actions: </b><div id=rac></rac></span></div>";
+    echo "</div>";
+}
+
 function generateTable($w) {
     global $link;
     $weekLetter = $w[0];
@@ -80,7 +89,7 @@ function insertLessons($day, $period, $teacher, $weekLetter) {
             if ($req_done) {
                 echo "id='lessonDone';";
             }
-            echo 'type="button" class="lesson">';
+            echo 'type="button" class="lesson" onclick="fillContent(\''."info".'\', \''.htmlspecialchars($req_title, ENT_QUOTES).'\', \''.htmlspecialchars($req_desc, ENT_QUOTES).'\', \''.$req_ras.'\', \''.htmlspecialchars($req_rac, ENT_QUOTES).'\', \''.$req_id.'\', \''.$lesson[0].'\', \''.$teacher.'\',\''.$req_done.'\' )">';
             echo '<span class="lessonInfo">', $lesson[0] , '<br>', $lesson[1], '<br>', $lesson[2], '</span>';
             echo "<div class='reqContainer'><br/><span class='reqTitle'><b>$req_title</b></span>";
             if (strcmp($req_ras, 'NO')){
