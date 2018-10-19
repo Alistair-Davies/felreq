@@ -1,13 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys
+import os
 import mysql.connector
 
 mydb = mysql.connector.connect(
     host="localhost",
-    user="root",
-    passwd="",
-    database="felstedreq"
+    user="admin",
+    passwd="1234",
+    database="felstedreq",
+    charset = "utf8"
 )
 
 date = sys.argv[1]+sys.argv[2][:8].replace("/", ".")+"-"+sys.argv[2][8:].replace("/", ".")
@@ -17,12 +19,12 @@ db.execute(lessonquery)
 lessons = db.fetchall()
 list_lessons=[]
 
-
-filelocation="history\\"+date+".sql"
-f = open(filelocation,'x')
+path="/home/pi/repos/felreq/history"
+filelocation=date+".sql"
+f = open(os.path.join(path, filelocation),'w')
 
 f.write("DELETE FROM history_requisition;")
-f.write("DELETE FROM history_lesson;\")
+f.write("DELETE FROM history_lesson;")
 
 for lesson in lessons:
    list_lessons.append(lesson[6])
@@ -37,7 +39,7 @@ for req in reqs:
 
 f.close()
 
-f = open("/var/www/main/history.php", 'w')
+f = open("weekLinks.php", 'w')
 
 weekOption = "<form class='historyLink' method='GET' action=''>\
 <input type='hidden' name='view' value='"+date+"'/><input type=submit value='"+date+"'/>\
@@ -45,5 +47,3 @@ weekOption = "<form class='historyLink' method='GET' action=''>\
 
 f.write(weekOption+"\n")
 f.close()
-
-
