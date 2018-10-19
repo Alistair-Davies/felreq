@@ -11,8 +11,8 @@ if (isset($_POST['doneID']) && isset($_POST['doneBool'])){markDone($_POST['doneI
 if (isset($_POST['saveweekID'])) {
     $tmpwid = $_POST['saveweekID'];
     $tmpweekdates = $_POST['saveweek'];
-    exec("sudo -u www-data python /home/pi/repos/felreq/saveWeek.py $tmpwid $tmpweekdates 2>&1", $output);
-    do_logging("Output of call to python saveWeek.py: $output", "INFO");
+    exec("sudo -u www-data python3 /home/pi/repos/felreq/saveWeek.py $tmpwid $tmpweekdates 2>&1", $output);
+    do_logging("Output of call to python saveWeek.py:". var_dump($output), "INFO");
     $_POST = array();
 }
 $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
