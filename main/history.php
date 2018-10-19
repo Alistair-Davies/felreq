@@ -1,5 +1,9 @@
-<?php
 
+<head>
+    <link rel="stylesheet" type="text/css" href="techcss.css"/> 
+</head>
+
+<?php
     require("functions_history.php");
     if (!isset($_GET['view'])) {
         //some sort of header
