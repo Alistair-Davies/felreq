@@ -12,15 +12,15 @@
     padding: 0.5px 0;
 	text-align: center;
 	font-family: Verdana, Geneva, sans-serif;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
     font-weight: 600;
 	font-size:20px;
 }
 
 .weekLink {
-	border: 1.5px solid darkorange;
     font-size: 20px;
-    padding: 5px;
+    border: none;
+    padding: 5px 35px;
     margin-bottom: 10px;
 }
 
@@ -40,14 +40,18 @@
     margin-bottom: 7.5px;
 }
 
+.backButton:hover, .weekLink:hover {
+	cursor:pointer;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24), 0 15px 40px 0 rgba(0,0,0,0.19);
+}
+
 .listOflinks {
 	position:relative;
-	top:15%;
+	top:25%;
 	left:45%;
-	padding:30px;
+	padding:15px 0px;
 	background-color:aliceblue;
-	transform: translate(-45%, -15%);
-	
+	transform: translate(-45%, -25%);
 }
 
 .timetable td {
