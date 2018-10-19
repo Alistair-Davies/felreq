@@ -4,11 +4,15 @@ function insertHistory($weekname) {
     global $link;
     $queries = file_get_contents("/home/pi/repos/felreq/history/$weekname.sql");
     if (mysqli_multi_query($link, $queries)) {
+        while (mysqli_more_results($link) && mysqli_next_result($link)) {
+            $i = mysqli_store_result($link);}
+        
         do_logging("Replaced history with $weekname information", "INFO");
     }
     else {
         do_logging("Problem replacing history with $weekname data", "ERROR");
     }
+
 }
 
 function do_logging($message, $level){
@@ -39,7 +43,7 @@ function generateTable($w) {
         $teachers[$i] = $x['teacher_id'];
         $i++;
     }
-
+    
     echo "<table class='timetable'><tr><th colspan='2'></th>";
     foreach ($teachers as $tea) {
         echo "<th class=teacherName type='button'>$tea</th>";
@@ -67,7 +71,6 @@ function insertLessons($day, $period, $teacher, $weekLetter) {
     global $link;
 
     $lesson_query = "SELECT name, room, subject, lesson_id FROM history_lesson WHERE teacher_id='$teacher' AND day='$day' AND period=$period AND week='$weekLetter'";
-    #echo $lesson_query;
     $lesson_result = mysqli_query( $link, $lesson_query);
     if ($lesson_result->num_rows > 0 ) {
         while ( $lessonResult = mysqli_fetch_array($lesson_result, MYSQLI_ASSOC) ) {
@@ -108,5 +111,4 @@ function insertLessons($day, $period, $teacher, $weekLetter) {
     }
     else { echo "<td class='emptyLesson'></td>"; }
 }
-
 ?>
