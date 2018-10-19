@@ -39,11 +39,26 @@ for req in reqs:
 
 f.close()
 
-f = open("weekLinks.php", 'w')
+filename = "weekLinks.php"
 
 weekOption = "<form class='historyLink' method='GET' action=''>\
 <input type='hidden' name='view' value='"+date+"'/><input type=submit value='"+date+"'/>\
 </form>"
 
+if not os.path.exists(filename):
+    append_write = 'w'
+else:
+    f = open(filename, 'r')
+    lines = f.readlines()
+    f.close()
+    found = False
+    for line in lines:
+        if weekOption in line:
+            found = True
+
+    if not found:
+        append_write = 'a'
+
+f = open(filename, append_write)
 f.write(weekOption+"\n")
 f.close()
