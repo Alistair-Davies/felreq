@@ -71,7 +71,25 @@
           position:relative;
           transform: translate(-50%, -0%);
           color: red;
+      }
 
+      .loginInformation {
+          background: aliceblue;
+          border: dashed 1px midnightblue;
+          padding: 25px;
+          font-size: 18px;
+          border-radius: 10px;
+          margin-top: 10px;
+          text-align:center;
+      }
+
+      .logInformation p {
+          display:inline-block;
+      }
+
+      .loginInformation b {
+          font-size:40px;
+          float:left;
       }
     </style>
 </head>
@@ -155,6 +173,7 @@ if (isset($_POST['usr'])) {
 
         <?php if (isset($f)) {echo ' <br/><br/><p id=fail> That ID was not recognised. Please try again.</p>';} ?>
     </div>
+    <div class="loginInformation"><b>&#9432;</b><p>Your login ID is three letters, usually your initials.</p></div>
 </div>
 
 </body>
