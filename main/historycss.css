@@ -24,7 +24,7 @@
     margin-bottom: 10px;
 }
 
-.backButton, .logoutButton {
+.backButton, #logoutButton {
 	background-color: AliceBlue;
     border: none;
     border-radius: 3px;
@@ -37,7 +37,8 @@
     -webkit-transition-duration: 0.4s;	
     position:relative;
     left:5%;
-    margin-bottom: 7.5px;
+    margin-bottom: 10px;
+    margin-right:22px;
 }
 
 .buttonForms {
