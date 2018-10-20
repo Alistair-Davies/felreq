@@ -13,18 +13,22 @@
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
-    border-right:1px #ccc solid
+    border-right:1px #ccc solid;
+    font-size:15px;
 }
 
-.tab form {
+.tabForm {
+    display:inline-block;
+}
+#logoutForm {
     float:right;
 }
 
-.tab form input {
+.tabForm input {
     background-color: inherit;
     padding: 14px 16px;
     border:none;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .tab button:hover, .tab form input:hover {
