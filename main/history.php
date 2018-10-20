@@ -1,12 +1,21 @@
 
 <head>
-    <link rel="stylesheet" type="text/css" href="historycss.css"/> 
+    <link rel="stylesheet" type="text/css" href="historycss.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <?php
+    session_start();
+    if (!isset($_SESSION['tech'])) {
+        header("Location:login.php");
+    }
+    $tech = $_SESSION['tech'];
+
     require("functions_history.php");
     if (!isset($_GET['view'])) {
 		echo "<div class='histContainer'><h1>History Archives</h1>";
+        echo "<form method='POST' action='tech_$tech.php'><input class='backButton' type='submit' value='Back to current week'/></form>";
+        echo '<form method="POST" action="login.php"><input class="fa" type="submit" value="Logout &#xf08b;"/> </form>';
         echo "<div class='listOfinks'>";
         include("weekLinks.php");
         echo "</div>";

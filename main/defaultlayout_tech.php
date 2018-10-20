@@ -20,7 +20,8 @@ $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
 <div class="tab">
     <button class="tablinks" onclick="openWeek(event, 'thisweek')">This Week <?php echo $weekdates[0][0], ' - ', $weekdates[0][6]; ?></button>
     <button class="tablinks" onclick="openWeek(event, 'nextweek')">Next Week <?php echo $weekdates[1][0], ' - ', $weekdates[1][6]; ?></button>
-    <form method="POST" action="login.php"> <input class="fa" type="submit" value="Logout &#xf08b;"/> </form>
+    <form method="POST" action="history.php"><input type="submit" value="History Archive"/></form>
+    <form method="POST" action="login.php"><input class="fa" type="submit" value="Logout &#xf08b;"/> </form>
 </div>
 <div class="modals">
     <?php
