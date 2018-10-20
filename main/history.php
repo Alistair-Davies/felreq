@@ -32,7 +32,8 @@
         or die("Could not open the db '$dbname'");
         
 		$historydate = $_GET['view'];
-        echo "<div class='header'><h1>History: $historydate</h1></div>";
+        $d = str_replace('-',' - ', str_replace('.', '/', substr($historydate, 1, strlen($historydate)-1)));
+        echo "<div class='header'><h1>History: $historydate[0] $d </h1></div>";
         echo '<form method="GET" action=""><input class="backButton" type="submit" value="back"/></form>';
 
         generateModal();
