@@ -14,9 +14,9 @@
     require("functions_history.php");
     if (!isset($_GET['view'])) {
 		echo "<div class='histContainer'><h1>History Archives</h1>";
-        echo "<form method='POST' action='tech_$tech.php'><input class='backButton' type='submit' value='Back to current week'/></form>";
-        echo '<form method="POST" action="login.php"><input class="fa" type="submit" value="Logout &#xf08b;"/> </form>';
-        echo "<div class='listOfinks'>";
+        echo "<form class='buttonForms' method='POST' action='tech_$tech.php'><input class='backButton' type='submit' value='Back to current week'/></form>";
+        echo '<form method="POST" action="login.php"><input class="fa" id="logoutButton" type="submit" value="Logout &#xf08b;"/></form>';
+        echo "<div class='listOflinks'>";
         include("weekLinks.php");
         echo "</div>";
 		echo "</div>";
