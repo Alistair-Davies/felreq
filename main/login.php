@@ -117,7 +117,7 @@ function do_logging($message, $level){
 }
 
 if (isset($_POST['usr'])) {
-    $usr =  $_POST['usr'];
+    $usr =  strtolower($_POST['usr']);
 
     $tquery  = "SELECT teacher_id FROM teacher WHERE teacher_id = '$usr'";
     $techquery = "SELECT technician_id FROM technician WHERE technician_id='$usr'";
