@@ -1,5 +1,4 @@
 <?php
-
 function insertHistory($weekname) {
     global $link;
     $queries = file_get_contents("/home/pi/repos/felreq/history/$weekname.sql");
@@ -13,12 +12,6 @@ function insertHistory($weekname) {
         do_logging("Problem replacing history with $weekname data", "ERROR");
     }
 
-}
-
-function do_logging($message, $level){
-    $date = date("Y-m-d h:m:s");
-    $file = __FILE__;
-    error_log("[ $date ] [ $level ] [ $file ] $message".PHP_EOL,3,"/var/log/nginx/felreq");
 }
 
 function generateModal()
