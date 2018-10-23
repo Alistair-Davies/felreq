@@ -10,3 +10,5 @@ Scripts:
  * saveWeek.py - Called by PHP on defaultlayout_tech.php on button click. Creates a sql script in history/ with format Add.mm.yy-dd.mm.yy.sql which contans information on that week.
 
 * Add.mm.yy-dd.mm.yy.sql - A sql script which clears history_lesson and history_requisition tables, then inserts corresponding weeks data into those tables. (A way of saving reqisition weeks.) - To be used by history.php.
+
+* deploy.sh is the big boy script that calls all scripts above to get setup. It takes the database login credentials as it arguments and should be run with: `bash deploy.sh $user $pass` 
