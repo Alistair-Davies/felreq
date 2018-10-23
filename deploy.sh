@@ -11,4 +11,6 @@ echo "Initialised and populated database"
 
 echo "Copying PHP directory to /var/www/"
 sudo cp -r /home/pi/repos/felreq/main /var/www/
+sudo touch /var/www/main/weekLinks.php
+sudo chown www-data /var/www/main/weekLinks.php
 echo "Website Deployed! Visit httpsL//felreq.hopto.org"
