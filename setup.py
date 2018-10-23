@@ -86,7 +86,7 @@ def processLesson(lesson, teacher):
       return "INSERT INTO lesson VALUES ('"+group+"','"+room+"','"+day+"',"+period+",'"+week+"','"+subject+"',NULL,'"+teacher+"');\n"
 
 def insertTeacherHTML(teacher):
-    return "<?php\n\trequire(\"functions.php\");\n\tcheck_user('teach');\n\tdb_connect();\n\trequire(\"functions_teach.php\");\n\tif(!isset($_GET['teach'])\
+    return "<?php\n\trequire(\"functions.php\");\n\tcheck_user('teach');\n\t$link=db_connect();\n\trequire(\"functions_teach.php\");\n\tif(!isset($_GET['teach'])\
 ||!strcmp($_GET['teach'], '"+teacher+"')){\n\t\t$teach=\""+teacher+"\";\n\
 \t\t$enableEdit=1;\n\t}\n\telse{\n\t\t$teach=$_GET['teach'];\n\t\t$enableEdit=0;\n\t}\n\trequire\
 (\"defaultlayout_teach.php\");\n?>"

@@ -15,6 +15,7 @@ function db_connect() {
     or die( mysqli_connect_error() );
     mysqli_select_db( $link, $dbname )
     or die("Could not open the db '$dbname'");
+    return $link;
 }
 
 function do_logging($message, $level){
