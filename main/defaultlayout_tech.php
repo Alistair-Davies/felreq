@@ -18,7 +18,7 @@ if (isset($_POST['saveweekID'])) {
 $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
 ?>
 <div class="tab">
-    <button class="tablinks" onclick="openWeek(event, 'thisweek')">This Week <?php echo $weekdates[0][0], ' - ', $weekdates[0][6]; ?></button>
+    <button class="tablinks" id="defaultTab" onclick="openWeek(event, 'thisweek')">This Week <?php echo $weekdates[0][0], ' - ', $weekdates[0][6]; ?></button>
     <button class="tablinks" onclick="openWeek(event, 'nextweek')">Next Week <?php echo $weekdates[1][0], ' - ', $weekdates[1][6]; ?></button>
     <form class="tabForm" method="POST" action="history.php"><input type="submit" value="History Archive"/></form>
     <form class="tabForm" id="logoutForm" method="POST" action="login.php"><input class="fa" type="submit" value="Logout &#xf08b;"/> </form>
@@ -51,6 +51,7 @@ $weekdates = getStartAndEndDate(date('W')-1,date('Y'));
 <script>
     var tab = sessionStorage.getItem("sessionTab");
     if (tab) { openWeek(event, tab); }
+    else { document.getElementById("defaultTab").click();}
 
     function openWeek(evt, weekview) {
         var i, tabcontent, tablinks;
